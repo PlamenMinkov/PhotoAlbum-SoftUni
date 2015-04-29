@@ -9,9 +9,10 @@
     $method = "index";
     $param = array();
 
+    include_once 'libs/Database.php';
     include_once 'controllers/master.php';
+    include_once 'models/master.php';
     
-    echo '<br/>';
     if(!(empty($request))) {
         if(strpos($request, $request_home)) { // see if the $request_home is in $request
             $start_pos = strpos($request, $request_home);
@@ -32,6 +33,7 @@
 //                }
 //                else {
                     include_once 'controllers/' .$controller. '.php';
+                    //include_once 'models/' .$controller. '.php';
                 //}                
             }
         }
@@ -43,20 +45,10 @@
 //        echo '<br/>Greshkaaaaaa';
 //    }
 //    else {
-        $instance = new $controller_class();
+        $controller_instance = new $controller_class();
     
-        if(method_exists($instance, $method)) {// see if in this class exist method == $method.value
-            call_user_func_array(array($instance, $method), array($param));
+        if(method_exists($controller_instance, $method)) {// see if in this class exist method == $method.value
+            call_user_func_array(array($controller_instance, $method), array($param));
         }
     //}    
 ?>
-
-<!--<html>
-    <head>
-        <meta charset="UTF-8">
-        <title></title>
-    </head>
-    <body>-->
-        
-<!--    </body>
-</html>-->

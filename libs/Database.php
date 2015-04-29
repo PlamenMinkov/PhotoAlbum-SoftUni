@@ -1,4 +1,6 @@
 <?php
+namespace Lib;
+
 /**
  * Mysql database class - only one connection alowed.
  *
@@ -44,7 +46,7 @@ class Database
      *@return Connection
      */
     public function getConnection(){
-        $this->connection=new mysqli($this->host,$this->username,$this->pass,$this->database);
+        $this->connection=new \mysqli($this->host,$this->username,$this->pass,$this->database);
         // Error handling
 		if(mysqli_connect_error()) {
 			trigger_error("Failed to connect to MySQL: " . mysql_connect_error(),

@@ -33,6 +33,18 @@ class Master_Model {
         $this->connection = $connection;
      }
      
+    public function get_by_id( $id ) {
+        $results = $this->find( array( 'where' => 'id = ' .$id ) );
+        //$results = $this->find( array( 'columns' => 'album_name', 'where' => 'id = ' .$id ) );
+        return $results;
+    } 
+    
+    public function get_album_type( $id ) {
+        $results = $this->find( array( 'where' => 'id = ' .$id ) );
+
+        return $results;
+    } 
+    
     public function find( $args = array() ) {
         $args = array_merge( array(
             'table' => $this->table,

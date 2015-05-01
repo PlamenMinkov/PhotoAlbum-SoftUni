@@ -1,16 +1,16 @@
 <?php
 namespace Controllers;
 
-class Albums_Controller extends Master_Controller{
+class Users_Controller extends Master_Controller{
     public function __construct() {
-        parent:: __construct( get_class(), 'album', 'views/album/' );
+        parent:: __construct( get_class(), 'user', 'views/user/' );
     }
     
     public function Index() {
         echo '<br/>';
-        $albums = $this->model->find();
+        $users = $this->model->find();
         
-        $pageTitle = "album";
+        $pageTitle = "Users";
         
         $template_name = $this->directory_path . $this->views_dir . 'index.php';
         

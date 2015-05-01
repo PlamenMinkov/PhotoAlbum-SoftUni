@@ -21,7 +21,7 @@ class Master_Model {
         $this->limit = $limit;
         
         $db = \Lib\Database::getInstance();
-        $db->setParameters('localhost', 'root', '', 'photo_album');
+        $db->setParameters(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
         $connection = $db->getConnection();
         mysqli_query($connection, 'SET NAMES utf8');
         mb_internal_encoding('UTF-8');

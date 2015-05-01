@@ -9,6 +9,7 @@
     $method = "index";
     $param = array();
 
+    include_once 'config/dataForDB.php';
     foreach (glob('libs/*.php') as $file) {
         include_once $file;
     }

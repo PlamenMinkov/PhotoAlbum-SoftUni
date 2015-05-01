@@ -6,8 +6,6 @@ class Register_Controller extends Master_Controller {
 	
 	public function __construct() {
 		parent::__construct( get_class(), 'master', '/views/register/' );
-		
-		echo "Register Controller created<br />";
 	}
 	
 	public function index() {

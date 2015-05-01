@@ -115,8 +115,8 @@ class Master_Model {
             throw new Exception('File upload failed');
         } else {
             $ins = "INSERT INTO `images` ( `image_name`,`album_id`, `user_id`)
-                        VALUES (\"{$picName}\", \"{$album_type[0]}\", \"{$_SESSION['user_id']}\")";
-                        
+                        VALUES (\"{$picName}\", {$album_type[0]}, {$_SESSION['user_id']})";
+            echo $ins;      
             $q = mysqli_query($GLOBALS['connection'], $ins);
         }
     }

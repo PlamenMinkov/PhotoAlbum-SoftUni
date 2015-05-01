@@ -7,8 +7,9 @@ class Images_Controller extends Master_Controller{
     }
     
     public function Index() {
-        echo '<br/>';
         $images = $this->model->find();
+        $albums = $this->model->findByTableName("albums");
+        $album_types = $this->model->findByTableName("album_types");
         
         $pageTitle = "images";
         
@@ -18,6 +19,10 @@ class Images_Controller extends Master_Controller{
     }
     
     public function upload() {
+        $images = $this->model->find();
+        $albums = $this->model->findByTableName("albums");
+        $album_types = $this->model->findByTableName("album_types");
+        
         $pageTitle = "upload images";
         
         $template_name = $this->directory_path . $this->views_dir . 'upload.php';

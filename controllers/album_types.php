@@ -8,6 +8,9 @@ class Album_types_Controller extends Master_Controller{
     
     public function Index() {
         echo '<br/>';
+        
+        $albums = $this->model->findByTableName("albums");
+        $images = $this->model->findByTableName("images");
         $album_types = $this->model->find();
         
         $pageTitle = "Album Types";

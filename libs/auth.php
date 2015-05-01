@@ -44,7 +44,8 @@ public function is_logged_in() {
             $_SESSION['user_id'] = $row['user_id'];
             $_SESSION['user_email'] = $row['email'];
             
-            return true;
+            header('Location: http://'. DB_HOST . $GLOBALS['base_url']);
+            exit();
         }
         
         return false;

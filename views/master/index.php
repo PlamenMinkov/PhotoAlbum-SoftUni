@@ -1,18 +1,11 @@
-<header>
-    <ul>
 <?php
-    foreach( $album_types as $album_type ) {
-        echo "<li><button><a href=\"http://". DB_HOST . ""
-                . "{$_SERVER['REQUEST_URI']}album_types/show/{$album_type["id"]}\">"
-                . "{$album_type["type_name"]}</a></button></li>";
-    }
-?>
-    </ul>
-</header>  
-<?php
-    foreach( $albums as $album ) {
-        echo "<button><a href=\"http://". DB_HOST . "{$_SERVER['REQUEST_URI']}albums/show/{$album["id"]}\">{$album["album_name"]}</a></button>";
-    }
+    include_once 'views/elements/header_menu.php';
+    include_once 'views/elements/aside_left.php';
+
+    echo '<section class="body_section">'
+    . '<div class="img_container">'
+            . '<center><h3 class="container_title">All Images</h3></center>';
+    
     foreach( $images as $image ) : 
         $img_name = $image["image_name"];
         $album_id = $image["album_id"];
@@ -27,7 +20,9 @@
         }
     ?>
 
-    <img width="100" height="100" src="uploads/<?php echo $album;?>/<?php echo $img_name;?>">
+    <img width="200" height="200" src="uploads/<?php echo $album;?>/<?php echo $img_name;?>">
 
 <?php endforeach; ?>
-
+    
+    </div>
+</section>

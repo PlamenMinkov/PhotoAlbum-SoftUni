@@ -18,19 +18,15 @@ class Images_Controller extends Master_Controller{
     }
     
     public function upload() {
-        if ( isset( $_POST['username'] ) && isset( $_POST['password'] ) ) {
-
-            $logged_in = $auth->login( $_POST['username'], $_POST['password'] );
-
-            if ( ! $logged_in ) {
-                    $login_text = 'Login not successful.';
-            } else {
-                    $login_text = 'Login was successful! Hi ' . $_POST['username'];
-            }
-        }
-
-        $template_file = $this->directory_path . $this->views_dir . 'login.php';
-
+        $pageTitle = "upload images";
+        
+        $template_name = $this->directory_path . $this->views_dir . 'upload.php';
+        
         include_once $this->layout;
+        
+        if(isset($_POST['submit']) && count($_FILES) > 0)
+        {
+            $this->model->uploadImages($_FILES['fileToUpload'], $_POST['type'], $_POST['img_name']);
+        }
     }
 }

@@ -16,4 +16,6 @@ if (!$connection) {
 
 $GLOBALS['connection'] = $connection;
 
+$GLOBALS['root_dir'] = str_replace("\\","/",DX_ROOT_DIR);
+
         

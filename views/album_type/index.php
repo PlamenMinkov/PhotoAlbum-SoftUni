@@ -10,3 +10,8 @@
 	</tr>
 <?php endforeach; ?>
 </table>
+<form action="" method="post">
+    Create new album type:<br/>
+    <span>Name: </span><input type="text" name="type_name"><br/>
+    <input type="submit" value="Create" name="submit">
+</form>

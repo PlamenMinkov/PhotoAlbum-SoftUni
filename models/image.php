@@ -12,7 +12,5 @@ class Image_Model extends \Models\Master_Model {
     public function get_albums() {
         return parent::find( );
     }
-    
-    
 }
 

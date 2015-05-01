@@ -16,4 +16,22 @@ class Albums_Controller extends Master_Controller{
         
         include_once $this->layout;
     }
+    
+    public function create() {
+        $pageTitle = "Create Album";
+        
+        $template_name = $this->directory_path . $this->views_dir . 'create.php';
+        
+        include_once $this->layout;
+        
+        if(isset($_POST['submit']))
+        {
+            $album_type = explode("/", $_POST['type']);
+            
+            $data = array("name" => $_POST['album_name'],
+                            "type_id" => $album_type[0]);
+                        var_dump($data);
+            $this->model->createNewAlbum($data);
+        }
+    }
 }

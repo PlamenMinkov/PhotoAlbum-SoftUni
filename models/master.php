@@ -61,6 +61,17 @@ class Master_Model {
         return $results;
     }
     
+    public function findByTableName($table_name) {
+
+        $query = "select * from `{$table_name}`";
+
+        $result_set = $GLOBALS['connection']->query( $query );
+
+        $results = $this->process_results( $result_set );
+
+        return $results;
+    }
+    
     protected function process_results( $result_set ) {
         $results = array();
 
@@ -75,6 +86,39 @@ class Master_Model {
     
     public function Index() {
         echo '<br/>dedede';
+    }
+    
+    public function uploadImages($file, $album_type, $file_name) {
+        $image = $file;
+        $file_type = $image['type'];
+        $file_size = $image['size'];
+        $file_path = $image['tmp_name'];
+
+        $picName = $file_name . '.' . str_replace('image/', '', $file_type);
+
+        if (!($file_type == "image/jpeg" || $file_type == "image/png" || $file_type == "image/gif")) {
+            throw new Exception('Invalid extension for avatar');
+        }
+        if (!($file_size < 1048576)) {
+            throw new Exception('File is too big.');
+        }
+
+        $album_type = explode("/", $album_type);
+
+        if (!file_exists('uploads' . DIRECTORY_SEPARATOR . $album_type[1])) {
+            mkdir('uploads' . DIRECTORY_SEPARATOR . $album_type[1], 0777);
+        }
+
+        $uploaded = move_uploaded_file($file_path, 'uploads' . DIRECTORY_SEPARATOR . $album_type[1] . DIRECTORY_SEPARATOR . $picName);
+
+        if ($uploaded == false) {
+            throw new Exception('File upload failed');
+        } else {
+            $ins = "INSERT INTO `images` ( `image_name`,`album_id`, `user_id`)
+                        VALUES (\"{$picName}\", \"{$album_type[0]}\", \"{$_SESSION['user_id']}\")";
+                        
+            $q = mysqli_query($GLOBALS['connection'], $ins);
+        }
     }
 }
 

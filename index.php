@@ -25,20 +25,21 @@
             
             $componets = explode('/', $request, 3);
             
-            if(count($componets) > 1) {
+            if(count($componets) > 0 && 
+                        $componets[0] != "" && 
+                        count($componets) < 2) {
+                $controller = $componets[0];
+                
+                include_once 'controllers/' .$controller. '.php'; 
+            }
+            else if(count($componets) > 1) {
                 list($controller, $method) = $componets;
                 
                 if(isset($componets[2])) {
                     $param = $componets[2];
                 }
                 
-//                if(!class_exists('\Controllers\\' . ucfirst($controller) . '_Controller')) {
-//                    echo '<br/>Greshkaaaaaa';
-//                }
-//                else {
-                    include_once 'controllers/' .$controller. '.php';
-                    //include_once 'models/' .$controller. '.php';
-                //}                
+                include_once 'controllers/' .$controller. '.php';           
             }
         }
     }

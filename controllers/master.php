@@ -19,7 +19,7 @@ class Master_Controller {
         include_once $this->directory_path . "models/{$model}.php";
         $model_class = "\Models\\" . ucfirst( $model ) . "_Model";  
 		
-        $this->model = new $model_class( array( 'table' => 'none' ) );
+        $this->model = new $model_class( array( 'table' => 'image' ) );
         
         $logged_user = \Lib\Auth::get_instance()->get_logged_user();
         $this->logged_user = $logged_user;
@@ -28,7 +28,11 @@ class Master_Controller {
     }
      
     public function Index() {
-        $pageTitle = "master";
+        $pageTitle = "Home Page";
+        
+        $album_types = $this->model->findByTableName("album_types");
+        $albums = $this->model->findByTableName("albums");
+        $images = $this->model->findByTableName("images");
         
         $template_name = $this->directory_path . 'views/master/index.php';
         

@@ -2,7 +2,6 @@
 namespace Models;
 
 class Master_Model {
-    protected $connection;
     protected $table;
     protected $limit;
      
@@ -19,18 +18,6 @@ class Master_Model {
 		
         $this->table = $table;
         $this->limit = $limit;
-        
-        $db = \Lib\Database::getInstance();
-        $db->setParameters(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
-        $connection = $db->getConnection();
-        mysqli_query($connection, 'SET NAMES utf8');
-        mb_internal_encoding('UTF-8');
-        if (!$connection) {
-            echo 'Сриване на системата!!!';
-            exit();
-        }
-        
-        $this->connection = $connection;
      }
      
     public function get_by_id( $id ) {
@@ -67,7 +54,7 @@ class Master_Model {
 
 // 		var_dump($query);
 
-        $result_set = $this->connection->query( $query );
+        $result_set = $GLOBALS['connection']->query( $query );
 
         $results = $this->process_results( $result_set );
 

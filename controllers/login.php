@@ -23,7 +23,7 @@ class Login_Controller extends Master_Controller {
             if ( empty( $user ) && isset( $_POST['username'] ) && isset( $_POST['password'] ) ) {
 
                 $logged_in = $auth->login( $_POST['username'], $_POST['password'] );
-
+                var_dump($_SESSION);
                 if ( ! $logged_in ) {
                         $login_text = 'Login not successful.';
                 } else {

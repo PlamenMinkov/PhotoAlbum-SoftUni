@@ -6,22 +6,10 @@ class Auth {
 	
 private static $session = null;
 
-protected $connection;
-
 private function __construct() {
     // Session lifetime = 30min
     session_set_cookie_params(1800,"/");// set 30 min session live
     session_start();
-    
-    $db = \Lib\Database::getInstance();
-    $db->setParameters('localhost', 'root', '', 'photo_album');
-    $this->connection = $db->getConnection();
-    mysqli_query($this->connection, 'SET NAMES utf8');
-    mb_internal_encoding('UTF-8');
-    if (!$this->connection) {
-        echo 'Сриване на системата!!!';
-        exit();
-    }
 }
 
 public static function get_instance() {
@@ -43,11 +31,11 @@ public function is_logged_in() {
 
     public function login( $username, $password ) {
         $username = trim($username);
-        $username = mysqli_real_escape_string($this->connection, $username);
+        $username = mysqli_real_escape_string($GLOBALS['connection'], $username);
         $password = trim($password);
-        $password = mysqli_real_escape_string($this->connection, $password);
+        $password = mysqli_real_escape_string($GLOBALS['connection'], $password);
         
-        $userDB = mysqli_query($this->connection, 
+        $userDB = mysqli_query($GLOBALS['connection'], 
                 "SELECT * FROM users Where `username` = \"{$username}\" AND `password`=\"". md5($password) ."\"");
         
         
@@ -70,18 +58,18 @@ public function is_logged_in() {
             throw new Exception('Wrong Username');
         } 
         else {
-            $username = mysqli_real_escape_string($this->connection, $username); // make data save before send query to MySQL
+            $username = mysqli_real_escape_string($GLOBALS['connection'], $username); // make data save before send query to MySQL
             $pass = trim($pass);
-            $pass = mysqli_real_escape_string($this->connection, $pass);
+            $pass = mysqli_real_escape_string($GLOBALS['connection'], $pass);
             $email = trim($email);
-            $email = mysqli_real_escape_string($this->connection, $email);
-            $select = mysqli_query($this->connection, 'SELECT * FROM users Where `username` = "' . $username . '"');
+            $email = mysqli_real_escape_string($GLOBALS['connection'], $email);
+            $select = mysqli_query($GLOBALS['connection'], 'SELECT * FROM users Where `username` = "' . $username . '"');
             if ($select->num_rows > 0) {
                 throw new Exception('Username already taken');
             }
             $ins = "INSERT INTO `users` (`username`, `password`,`email`, `admin`)
                         VALUES (\"{$username}\", md5(\"{$pass}\"), \"{$email}\", 0)";
-            $q = mysqli_query($this->connection, $ins);
+            $q = mysqli_query($GLOBALS['connection'], $ins);
             if ($q == false) {
                 throw new Exception('Query not executed');
             }

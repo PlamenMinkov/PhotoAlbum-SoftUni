@@ -9,11 +9,11 @@
     $method = "index";
     $param = array();
 
-    include_once 'config/dataForDB.php';
     foreach (glob('libs/*.php') as $file) {
         include_once $file;
     }
     
+    include_once 'config/dataForDB.php';
     include_once 'controllers/master.php';
     include_once 'models/master.php';
     

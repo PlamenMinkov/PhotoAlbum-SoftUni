@@ -26,4 +26,17 @@ class Albums_Controller extends Master_Controller{
             $this->model->createNewAlbum($data);
         }
     }
+    
+    public function show($album_id) {
+        $this_album = $this->model->findById("albums", $album_id);
+        $albums = $this->model->findByTableName("albums");
+        $album_types = $this->model->findByTableName("album_types");
+        $images = $this->model->findByAlbumId($album_id);
+        
+        $pageTitle = "Show Images From Album";
+        
+        $template_name = $this->directory_path . $this->views_dir . 'index.php';
+        
+        include_once $this->layout;
+    }
 }

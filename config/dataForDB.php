@@ -1,4 +1,5 @@
 <?php
+define('DX_ROOT_DIR_', realpath(dirname(__FILE__)) . '/');// here we get directory of this file
 define( 'DB_HOST', 'localhost' );
 define( 'DB_USERNAME', 'root' );
 define( 'DB_PASSWORD', '' );
@@ -16,6 +17,4 @@ if (!$connection) {
 
 $GLOBALS['connection'] = $connection;
 
-$GLOBALS['root_dir'] = str_replace("\\","/",DX_ROOT_DIR);
-
-        
+$GLOBALS['root_dir'] = str_replace("\\","/",DX_ROOT_DIR_);

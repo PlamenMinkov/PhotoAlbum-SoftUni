@@ -13,6 +13,13 @@
     display: block;
 }
 
+.center_buttons {
+    border-radius: 20px;
+    width: 80%;
+    margin: 10px;
+    display: block;
+}
+
 header {
     width: 60%;
     margin-left: 20%;

@@ -3,11 +3,16 @@
     include_once 'views/elements/aside_left.php';
     include_once 'views/elements/style.php';
     
+    $album_name = "";
+    
+    foreach( $this_album as $album ) {
+        $album_name = $album["album_name"];
+    }
+    
     echo '<section class="body_section">'
         . '<div class="img_container">'
-                . '<center><h3 class="container_title">All Images</h3></center>';
-    
-    foreach( $images as $image ) : 
+                . '<center><h3 class="container_title">Album ' .ucfirst($album_name)."</h3></center>";
+foreach( $images as $image ) : 
         $img_name = $image["image_name"];
         $album_id = $image["album_id"];
         $album;    
@@ -19,10 +24,11 @@
         while ($row = mysqli_fetch_array($result)) {
                 $album = $row[1];
         }
-?>
+    ?>
 
-    <img width="200" height="200" src="uploads/<?php echo $album;?>/<?php echo $img_name;?>">
+<img width="200" height="200" src="../../uploads/<?php echo $album;?>/<?php echo $img_name;?>">
 
 <?php endforeach; ?>
     </div>
 </section>
+
